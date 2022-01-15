@@ -46,7 +46,7 @@ type (
 	}
 )
 
-// NewACL ..
+// NewACL create new ACL with the given policies
 func NewACL(policies []Policy) (*ACL, error) {
 	enf, err := newEnforcer()
 	if err != nil {
@@ -66,7 +66,7 @@ func NewACL(policies []Policy) (*ACL, error) {
 	return acl, nil
 }
 
-// NewACLFromDB load policies from db and return
+// LoadPolicies load policies from db
 func LoadPolicies(ctx context.Context, queries *db.Queries) ([]Policy, error) {
 	dbPolices, err := queries.FindACLPolicies(ctx)
 	if err != nil {
