@@ -54,16 +54,20 @@ func main() {
 	acl, err := flyacl.NewACL(policies)
 	panicErr(err)
 
+	// editor cannot delete a story
 	acl.Can(Editor, Delete, Story)
 	err = acl.Can(Editor, Delete, Story)
 	dump(Editor, Delete, Story, err)
 
+	// editor can read a story
 	err = acl.Can(Editor, Read, Story)
 	dump(Editor, Read, Story, err)
 
+	// editor can write a story
 	err = acl.Can(Editor, Write, Story)
 	dump(Editor, Write, Story, err)
 
+	// reader cannot write a story
 	err = acl.Can(Reader, Write, Story)
 	dump(Reader, Write, Story, err)
 }
