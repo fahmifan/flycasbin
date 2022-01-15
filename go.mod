@@ -1,9 +1,10 @@
-module trycasbin
+module github.com/fahmifan/flycasbin
 
 go 1.17
 
 require (
 	github.com/casbin/casbin/v2 v2.40.6
+	github.com/lib/pq v1.10.4
 	github.com/stretchr/testify v1.7.0
 )
 

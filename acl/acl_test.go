@@ -1,4 +1,4 @@
-package flycasbin
+package acl
 
 import (
 	"testing"
@@ -7,31 +7,34 @@ import (
 )
 
 func TestACL(t *testing.T) {
-	// subjects ..
+	// define subjects
 	const (
-		Member Role = "MEMBER"
-		Editor Role = "EDITOR"
+		Reader Role = "reader"
+		Editor Role = "editor"
 	)
 
-	// resources ..
+	// define resources
 	const (
 		Story Resource = "story"
 	)
 
-	// actions ..
+	// define actions
 	const (
 		Read   Action = "read"
 		Write  Action = "write"
 		Delete Action = "delete"
 	)
 
-	policies := []ACL{
-		{Member, Story, Read},
+	// define policies
+	policies := []Policy{
+		{Reader, Story, Read},
 		{Editor, Story, Read},
 		{Editor, Story, Write},
 	}
 
-	InitPolicies(policies)
-	err := Editor.Can(Read, Story)
+	acl, err := NewACL(policies)
+	require.NoError(t, err)
+
+	err = acl.Can(Editor, Read, Story)
 	require.NoError(t, err)
 }
